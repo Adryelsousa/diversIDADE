@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Carteirinha</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #fd8aba, #f0c13e, #f76c6c, #ffb6c1); /* Fundo com efeito de arco-íris */
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            background-size: 300% 300%; /* Ajusta o movimento do fundo */
+            animation: rainbowBackground 10s ease infinite; /* Animação do fundo arco-íris */
+        }
+
+        @keyframes rainbowBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Cabeçalho com logo e botão */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #fd8aba;
+            z-index: 10;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .donate-button {
+            background-color: #ffffff;
+            color: #fd8aba;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            display: inline-block;
+            font-weight: 700; /* Poppins Bold */
+        }
+
+        .donate-button:hover {
+            background-color: #f0c13e;
+            color: #ffffff;
+        }
+
+        /* Deslocamento do formulário para baixo */
+        .container {
+            max-width: 400px;
+            margin: 150px auto 20px auto; /* Desloca o formulário para baixo */
+            padding: 20px;
+            background: #f0c13e;
+            border-radius: 10px;
+        }
+
+        label, input {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .carteirinha {
+            width: 800px;
+            height: 500px;
+            position: relative;
+            margin: 20px auto;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .carteirinha img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .info {
+            position: absolute;
+            left: 390px; /* Movido um pouco mais para a esquerda */
+            top: 270px; /* Ajuste vertical */
+            text-align: left;
+            font-size: 20px;
+            z-index: 2;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .info p {
+            margin-bottom: 2px; /* Reduzido o espaçamento entre perguntas */
+            display: flex;
+            align-items: center; /* Para garantir que perguntas e respostas fiquem na mesma linha */
+        }
+
+        .info strong {
+            font-weight: 800; /* Perguntas em Extra Bold */
+            margin-right: 10px; /* Um pouco de espaço entre a pergunta e a resposta */
+        }
+
+        .info span {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400; /* Respostas em Regular */
+            display: inline-block;
+        }
+
+        .foto {
+            position: absolute;
+            left: 80px;
+            top: 140px;
+            width: 200px;
+            height: 250px;
+            background: white;
+            overflow: hidden;
+            border-radius: 10px;
+            z-index: 2;
+        }
+
+        .foto img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Estilo para o botão de baixar */
+        .baixar-button {
+            padding: 10px;
+            background: #ffffff;
+            border: none;
+            color: #fd8aba;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-family: 'Poppins', sans-serif;
+            display: inline-block;
+        }
+
+        /* Centralização do botão de "Baixar Carteirinha" */
+        .baixar-button {
+            display: block;
+            margin: 20px auto;
+        }
+
+        /* Estilo para as perguntas no formulário */
+        label {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800; /* Extra Bold */
+        }
+
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800; /* Extra Bold */
+            font-size: 22px;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho com logo e botão -->
+    <div class="header">
+        <div class="logo">
+            <img src="https://i.postimg.cc/4xMsq4qw/logo-e-sou-negativo-tagline.png" alt="Logo">
+        </div>
+        <a href="https://donate.stripe.com/14kbJJgileY65gY5kk" class="donate-button" target="_blank">Doe com orgulho</a>
+    </div>
+
+    <!-- Formulário para preenchimento -->
+    <div class="container">
+        <h2>Preencha seus dados e Orgulhe-se</h2>
+        <input type="text" id="nome" placeholder="Nome">
+        <input type="number" id="idade" placeholder="Idade">
+        <input type="text" id="genero" placeholder="Gênero">
+        <input type="text" id="sexualidade" placeholder="Sexualidade">
+        <input type="file" id="foto" accept="image/*">
+        <button onclick="gerarCarteirinha()">Gerar Carteirinha</button>
+    </div>
+
+    <!-- Resultado da carteirinha gerada -->
+    <div class="carteirinha" id="carteirinha">
+        <img src="https://i.postimg.cc/x1YgyL6S/Projeto-carteirinha-1.png" alt="Fundo da Carteirinha">
+        <div class="foto" id="fotoPreview"></div>
+        <div class="info">
+            <p><strong>Nome:</strong> <span id="nomeOut"></span></p>
+            <p><strong>Idade:</strong> <span id="idadeOut"></span></p>
+            <p><strong>Gênero:</strong> <span id="generoOut"></span></p>
+            <p><strong>Sexualidade:</strong> <span id="sexualidadeOut"></span></p>
+        </div>
+    </div>
+
+    <!-- Botão para baixar a carteirinha -->
+    <button class="baixar-button" onclick="baixarImagem()">Baixar Carteirinha</button>
+
+    <script>
+        function gerarCarteirinha() {
+            document.getElementById('nomeOut').innerText = document.getElementById('nome').value;
+            document.getElementById('idadeOut').innerText = document.getElementById('idade').value;
+            document.getElementById('generoOut').innerText = document.getElementById('genero').value;
+            document.getElementById('sexualidadeOut').innerText = document.getElementById('sexualidade').value;
+
+            const file = document.getElementById('foto').files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    document.getElementById('fotoPreview').innerHTML = '<img src="' + event.target.result + '" />';
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function baixarImagem() {
+            html2canvas(document.getElementById("carteirinha"), {backgroundColor: null, useCORS: true}).then(canvas => {
+                let link = document.createElement('a');
+                link.href = canvas.toDataURL("image/png");
+                link.download = 'carteirinha.png';
+                link.click();
+            });
+        }
+    </script>
+</body>
+</html>

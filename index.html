@@ -43,7 +43,7 @@
 
         .donate-button {
             background-color: #ffffff;
-            color: #f0c13e;
+            color: #f0c13e; /* Cor inicial amarela */
             padding: 10px 20px;
             font-size: 16px;
             border-radius: 5px;
@@ -53,31 +53,29 @@
             font-weight: 700;
             position: relative;
             overflow: hidden;
-            transition: all 0.3s ease-in-out;
+            transition: color 0.4s ease; /* Transição suave para a cor do texto */
         }
 
         .donate-button:hover {
-            color: #fd8aba;
+            color: #fd8aba; /* Cor rosa durante o hover */
         }
 
-        .donate-button::before {
-            content: '';
+        .donate-button:before {
+            content: "";
             position: absolute;
             top: 50%;
             left: 50%;
             width: 300%;
             height: 300%;
-            background-color: #f0c13e;
-            transition: all 0.5s ease-in-out;
+            background-color: white;
+            transition: all 0.4s ease;
             border-radius: 50%;
-            transform: translate(-50%, -50%);
-            opacity: 0;
+            transform: translate(-50%, -50%) scale(1);
+            z-index: 0;
         }
 
-        .donate-button:hover::before {
-            width: 0;
-            height: 0;
-            opacity: 1;
+        .donate-button:hover:before {
+            transform: translate(-50%, -50%) scale(0);
         }
 
         .container {
@@ -123,8 +121,8 @@
         }
 
         .info p {
-            margin-bottom: 2px; /* Espaçamento reduzido entre as linhas */
-            line-height: 1.2; /* Altura da linha ajustada */
+            margin-bottom: 1px; /* Reduzi o espaçamento entre as linhas */
+            line-height: 0.5; /* Espaçamento entre linhas bem menor */
             display: flex;
             align-items: center;
         }
@@ -159,41 +157,21 @@
         }
 
         .baixar-button {
-            background-color: #ffffff;
-            color: #f0c13e;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 5px;
-            font-weight: 700;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease-in-out;
+            padding: 10px;
+            background: #ffffff;
             border: none;
-            cursor: pointer;
-        }
-
-        .baixar-button:hover {
             color: #fd8aba;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-family: 'Poppins', sans-serif;
+            display: inline-block;
         }
 
-        .baixar-button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 300%;
-            height: 300%;
-            background-color: #f0c13e;
-            transition: all 0.5s ease-in-out;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            opacity: 0;
-        }
-
-        .baixar-button:hover::before {
-            width: 0;
-            height: 0;
-            opacity: 1;
+        .baixar-button {
+            display: block;
+            margin: 20px auto;
         }
 
         label {

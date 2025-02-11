@@ -101,8 +101,8 @@
         }
 
         .info p {
-            margin-bottom: 0; /* Espaçamento reduzido ao máximo */
-            line-height: 1; /* Altura da linha ajustada ao mínimo */
+            margin-bottom: 0;
+            line-height: 1;
             display: flex;
             align-items: center;
         }
@@ -136,45 +136,8 @@
             object-fit: cover;
         }
 
-        .baixar-button {
-            padding: 10px;
-            background: #ffffff;
-            border: none;
-            color: #fd8aba;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-top: 20px;
-            font-family: 'Poppins', sans-serif;
-            display: inline-block;
-        }
-
-        .baixar-button {
-            display: block;
-            margin: 20px auto;
-        }
-
-        label {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 800;
-        }
-
-        h2 {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 800;
-            font-size: 22px;
-        }
-
-        #loading {
-            display: none;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            color: #ffffff;
-            margin-top: 10px;
-        }
-
-        /* Estilo do botão "Gerar Carteirinha" */
-        .generate-button {
+        /* Estilo do botão "Gerar Carteirinha" e "Baixar Carteirinha" */
+        .generate-button, .baixar-button {
             background-color: #ffffff;
             color: #fd8aba;
             padding: 10px 20px;
@@ -189,7 +152,7 @@
             overflow: hidden;
         }
 
-        .generate-button::after {
+        .generate-button::after, .baixar-button::after {
             content: '';
             position: absolute;
             top: 50%;
@@ -202,19 +165,27 @@
             z-index: 0;
         }
 
-        .generate-button:hover::after {
+        .generate-button:hover::after, .baixar-button:hover::after {
             width: 0;
             height: 0;
         }
 
-        .generate-button:hover {
+        .generate-button:hover, .baixar-button:hover {
             background-color: #f0c13e;
             color: #ffffff;
             transform: scale(1.05);
         }
 
-        .generate-button:active {
+        .generate-button:active, .baixar-button:active {
             transform: scale(0.95);
+        }
+
+        #loading {
+            display: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: #ffffff;
+            margin-top: 10px;
         }
     </style>
 </head>

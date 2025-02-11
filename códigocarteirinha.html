@@ -43,7 +43,7 @@
 
         .donate-button {
             background-color: #ffffff;
-            color: #f0c13e; /* Cor inicial amarela */
+            color: #fd8aba;
             padding: 10px 20px;
             font-size: 16px;
             border-radius: 5px;
@@ -51,31 +51,11 @@
             font-family: 'Poppins', sans-serif;
             display: inline-block;
             font-weight: 700;
-            position: relative;
-            overflow: hidden;
-            transition: color 0.4s ease; /* Transição suave para a cor do texto */
         }
 
         .donate-button:hover {
-            color: #fd8aba; /* Cor rosa durante o hover */
-        }
-
-        .donate-button:before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 300%;
-            height: 300%;
-            background-color: white;
-            transition: all 0.4s ease;
-            border-radius: 50%;
-            transform: translate(-50%, -50%) scale(1);
-            z-index: 0;
-        }
-
-        .donate-button:hover:before {
-            transform: translate(-50%, -50%) scale(0);
+            background-color: #f0c13e;
+            color: #ffffff;
         }
 
         .container {
@@ -121,8 +101,8 @@
         }
 
         .info p {
-            margin-bottom: 1px; /* Reduzi o espaçamento entre as linhas */
-            line-height: 0.5; /* Espaçamento entre linhas bem menor */
+            margin-bottom: 0; /* Espaçamento reduzido ao máximo */
+            line-height: 1; /* Altura da linha ajustada ao mínimo */
             display: flex;
             align-items: center;
         }
@@ -192,6 +172,50 @@
             color: #ffffff;
             margin-top: 10px;
         }
+
+        /* Estilo do botão "Gerar Carteirinha" */
+        .generate-button {
+            background-color: #ffffff;
+            color: #fd8aba;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .generate-button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%) rotate(45deg);
+            transition: all 0.5s ease;
+            z-index: 0;
+        }
+
+        .generate-button:hover::after {
+            width: 0;
+            height: 0;
+        }
+
+        .generate-button:hover {
+            background-color: #f0c13e;
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        .generate-button:active {
+            transform: scale(0.95);
+        }
     </style>
 </head>
 <body>
@@ -211,7 +235,7 @@
         <input type="text" id="genero" placeholder="Gênero">
         <input type="text" id="sexualidade" placeholder="Sexualidade">
         <input type="file" id="foto" accept="image/*">
-        <button onclick="gerarCarteirinha()">Gerar Carteirinha</button>
+        <button class="generate-button" onclick="gerarCarteirinha()">Gerar Carteirinha</button>
         <div id="loading">Gerando carteirinha...</div>
     </div>
 

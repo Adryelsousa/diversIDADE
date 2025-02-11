@@ -251,20 +251,9 @@
         </div>
     </div>
 
-    /* Estilo do botão "baixar a carteirinha */
-        .generate-button {
-            background-color: #ffffff;
-            color: #fd8aba;
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+    <!-- Botão para baixar a carteirinha -->
+    <button class="baixar-button" onclick="baixarImagem()">Baixar Carteirinha</button>
+
     <script>
         function gerarCarteirinha() {
             const nome = document.getElementById('nome').value;

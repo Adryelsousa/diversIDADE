@@ -8,14 +8,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(to bottom right, #fd8aba, #f0c13e, #f76c6c, #ffb6c1); /* Fundo com efeito de arco-íris */
+            background: linear-gradient(to bottom right, #fd8aba, #f0c13e, #f76c6c, #ffb6c1);
             font-family: 'Poppins', sans-serif;
             text-align: center;
             color: #ffffff;
             margin: 0;
             padding: 0;
-            background-size: 300% 300%; /* Ajusta o movimento do fundo */
-            animation: rainbowBackground 10s ease infinite; /* Animação do fundo arco-íris */
+            background-size: 300% 300%;
+            animation: rainbowBackground 10s ease infinite;
         }
 
         @keyframes rainbowBackground {
@@ -24,7 +24,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Cabeçalho com logo e botão */
         .header {
             display: flex;
             justify-content: space-between;
@@ -51,7 +50,7 @@
             text-decoration: none;
             font-family: 'Poppins', sans-serif;
             display: inline-block;
-            font-weight: 700; /* Poppins Bold */
+            font-weight: 700;
         }
 
         .donate-button:hover {
@@ -59,10 +58,9 @@
             color: #ffffff;
         }
 
-        /* Deslocamento do formulário para baixo */
         .container {
             max-width: 400px;
-            margin: 150px auto 20px auto; /* Desloca o formulário para baixo */
+            margin: 150px auto 20px auto;
             padding: 20px;
             background: #f0c13e;
             border-radius: 10px;
@@ -94,8 +92,8 @@
 
         .info {
             position: absolute;
-            left: 390px; /* Movido um pouco mais para a esquerda */
-            top: 270px; /* Ajuste vertical */
+            left: 390px;
+            top: 270px;
             text-align: left;
             font-size: 20px;
             z-index: 2;
@@ -103,19 +101,20 @@
         }
 
         .info p {
-            margin-bottom: 2px; /* Reduzido o espaçamento entre perguntas */
+            margin-bottom: 2px; /* Espaçamento reduzido entre as linhas */
+            line-height: 1.2; /* Altura da linha ajustada */
             display: flex;
-            align-items: center; /* Para garantir que perguntas e respostas fiquem na mesma linha */
+            align-items: center;
         }
 
         .info strong {
-            font-weight: 800; /* Perguntas em Extra Bold */
-            margin-right: 10px; /* Um pouco de espaço entre a pergunta e a resposta */
+            font-weight: 800;
+            margin-right: 10px;
         }
 
         .info span {
             font-family: 'Poppins', sans-serif;
-            font-weight: 400; /* Respostas em Regular */
+            font-weight: 400;
             display: inline-block;
         }
 
@@ -137,7 +136,6 @@
             object-fit: cover;
         }
 
-        /* Estilo para o botão de baixar */
         .baixar-button {
             padding: 10px;
             background: #ffffff;
@@ -151,24 +149,29 @@
             display: inline-block;
         }
 
-        /* Centralização do botão de "Baixar Carteirinha" */
         .baixar-button {
             display: block;
             margin: 20px auto;
         }
 
-        /* Estilo para as perguntas no formulário */
         label {
             font-family: 'Poppins', sans-serif;
-            font-weight: 800; /* Extra Bold */
+            font-weight: 800;
         }
 
         h2 {
             font-family: 'Poppins', sans-serif;
-            font-weight: 800; /* Extra Bold */
+            font-weight: 800;
             font-size: 22px;
         }
 
+        #loading {
+            display: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: #ffffff;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -189,6 +192,7 @@
         <input type="text" id="sexualidade" placeholder="Sexualidade">
         <input type="file" id="foto" accept="image/*">
         <button onclick="gerarCarteirinha()">Gerar Carteirinha</button>
+        <div id="loading">Gerando carteirinha...</div>
     </div>
 
     <!-- Resultado da carteirinha gerada -->
@@ -208,27 +212,58 @@
 
     <script>
         function gerarCarteirinha() {
-            document.getElementById('nomeOut').innerText = document.getElementById('nome').value;
-            document.getElementById('idadeOut').innerText = document.getElementById('idade').value;
-            document.getElementById('generoOut').innerText = document.getElementById('genero').value;
-            document.getElementById('sexualidadeOut').innerText = document.getElementById('sexualidade').value;
+            const nome = document.getElementById('nome').value;
+            const idade = document.getElementById('idade').value;
+            const genero = document.getElementById('genero').value;
+            const sexualidade = document.getElementById('sexualidade').value;
 
-            const file = document.getElementById('foto').files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    document.getElementById('fotoPreview').innerHTML = '<img src="' + event.target.result + '" />';
-                }
-                reader.readAsDataURL(file);
+            // Validação dos campos
+            if (!nome || !idade || !genero || !sexualidade) {
+                alert("Por favor, preencha todos os campos!");
+                return;
             }
+
+            // Exibe o indicador de carregamento
+            document.getElementById('loading').style.display = 'block';
+
+            // Simula um tempo de processamento (opcional)
+            setTimeout(() => {
+                // Exibe os dados na carteirinha
+                document.getElementById('nomeOut').innerText = nome;
+                document.getElementById('idadeOut').innerText = idade;
+                document.getElementById('generoOut').innerText = genero;
+                document.getElementById('sexualidadeOut').innerText = sexualidade;
+
+                // Upload da foto
+                const file = document.getElementById('foto').files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        document.getElementById('fotoPreview').innerHTML = '<img src="' + event.target.result + '" />';
+                        // Oculta o indicador de carregamento
+                        document.getElementById('loading').style.display = 'none';
+                    }
+                    reader.readAsDataURL(file);
+                } else {
+                    alert("Por favor, selecione uma foto!");
+                    document.getElementById('loading').style.display = 'none';
+                }
+            }, 1000); // Simula 1 segundo de processamento
         }
 
         function baixarImagem() {
+            // Exibe o indicador de carregamento
+            document.getElementById('loading').style.display = 'block';
+
             html2canvas(document.getElementById("carteirinha"), {backgroundColor: null, useCORS: true}).then(canvas => {
                 let link = document.createElement('a');
                 link.href = canvas.toDataURL("image/png");
                 link.download = 'carteirinha.png';
                 link.click();
+
+                // Oculta o indicador de carregamento e exibe mensagem de sucesso
+                document.getElementById('loading').style.display = 'none';
+                alert("Carteirinha baixada com sucesso!");
             });
         }
     </script>

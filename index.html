@@ -101,8 +101,8 @@
         }
 
         .info p {
-            margin-bottom: 0;
-            line-height: 1;
+            margin-bottom: 2px; /* Menor espaçamento entre linhas */
+            line-height: 0.9; /* Menor altura de linha */
             display: flex;
             align-items: center;
         }
@@ -187,6 +187,11 @@
             color: #ffffff;
             margin-top: 10px;
         }
+
+        /* Espaçamento ao final da página */
+        .footer-spacing {
+            margin-bottom: 50px; /* Espaço entre o botão e o final da página */
+        }
     </style>
 </head>
 <body>
@@ -224,7 +229,7 @@
     </div>
 
     <!-- Botão para baixar a carteirinha -->
-    <button class="baixar-button" onclick="baixarImagem()">Baixar Carteirinha</button>
+    <button class="baixar-button footer-spacing" onclick="baixarImagem()">Baixar Carteirinha</button>
 
     <script>
         function gerarCarteirinha() {

@@ -102,7 +102,7 @@
 
         .info p {
             margin-bottom: 2px; /* Espaçamento reduzido entre as linhas */
-            line-height: 1.2; /* Altura da linha ajustada */
+            line-height: 0.9; /* Altura da linha ajustada */
             display: flex;
             align-items: center;
         }
@@ -171,6 +171,44 @@
             font-weight: 600;
             color: #ffffff;
             margin-top: 10px;
+        }
+
+        /* Estilos para o botão "Gerar Carteirinha" animado */
+        button {
+            position: relative;
+            border: none;
+            background-color: #fd8aba;
+            color: white;
+            font-size: 18px;
+            padding: 15px 25px;
+            border-radius: 5px;
+            font-weight: 700;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        button:before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background-color: white;
+            transition: all 0.4s ease;
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(1);
+            z-index: 0;
+        }
+
+        button:hover {
+            color: #fd8aba;
+            background-color: white;
+        }
+
+        button:hover:before {
+            transform: translate(-50%, -50%) scale(0);
         }
     </style>
 </head>
